@@ -15,7 +15,7 @@ class ErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true }
+    return { hasError: true, error: error }
   }
 
   componentDidCatch(error, errorInfo) {
@@ -54,7 +54,9 @@ class ErrorBoundary extends Component {
               <details className="text-sm text-gray-600">
                 <summary className="cursor-pointer font-medium">Error Details</summary>
                 <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto">
-                  {this.state.errorInfo.componentStack}
+                  {this.state.errorInfo && this.state.errorInfo.componentStack 
+                    ? this.state.errorInfo.componentStack 
+                    : 'Error details not available'}
                 </pre>
               </details>
             )}

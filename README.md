@@ -835,3 +835,125 @@ The combination of HOCs and error boundaries creates robust, maintainable applic
 
 *This tutorial demonstrates practical implementations of advanced React patterns that are essential for building production-ready applications. The error handling and HOC patterns shown here provide a solid foundation for creating robust, maintainable React codebases.*
 
+
+
+## Unit Testing with Vitest and React Testing Library
+
+To ensure the reliability and maintainability of our React components, we have integrated unit testing using **Vitest** as the test runner and **React Testing Library** for testing React components in a user-centric way.
+
+### **Why Vitest?**
+
+Vitest is a fast and lightweight test framework powered by Vite. It offers a seamless developer experience with features like instant hot module reloading, smart watch mode, and compatibility with Vite's configuration. Its speed and integration with the existing build setup make it an ideal choice for this project.
+
+### **Why React Testing Library?**
+
+React Testing Library (RTL) focuses on testing components in a way that resembles how users interact with them. Instead of testing implementation details, RTL encourages testing the component's behavior from the user's perspective. This approach leads to more robust tests that are less likely to break due to internal refactoring.
+
+### **Testing Setup**
+
+1.  **Installation**: The necessary testing dependencies (`vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `jsdom`) are installed as dev dependencies.
+
+    ```bash
+    npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+    ```
+
+2.  **Vitest Configuration**: The `vite.config.js` file has been updated to include Vitest configuration, specifying `jsdom` as the test environment and `src/setupTests.js` for global setup.
+
+    ```javascript
+    // vite.config.js
+    export default defineConfig({
+      plugins: [react(),tailwindcss()],
+      test: {
+        environment: 'jsdom',
+        setupFiles: ['./src/setupTests.js'],
+        globals: true
+      },
+      // ... other configurations
+    })
+    ```
+
+3.  **Test Setup File (`src/setupTests.js`)**: This file imports `@testing-library/jest-dom` to extend Vitest's `expect` assertions with custom DOM matchers, making tests more readable and expressive.
+
+    ```javascript
+    // src/setupTests.js
+    import '@testing-library/jest-dom';
+    ```
+
+4.  **NPM Script**: A `test` script has been added to `package.json` to easily run tests using `npm test`.
+
+    ```json
+    // package.json
+    "scripts": {
+      "test": "vitest",
+      // ... other scripts
+    },
+    ```
+
+### **Example: Counter Component Unit Tests**
+
+We have added unit tests for the `Counter` component, located in `src/components/Counter.test.jsx`. These tests cover various scenarios, including initial rendering, incrementing, decrementing, resetting, and changing the step value.
+
+```jsx
+// src/components/Counter.test.jsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { Counter } from './Counter';
+
+describe('Counter', () => {
+  it('renders with initial count of 0', () => {
+    render(<Counter />);
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('increments count by 1 when +1 button is clicked', () => {
+    render(<Counter />);
+    fireEvent.click(screen.getByRole('button', { name: /\+ 1/i }));
+    expect(screen.getByText('1')).toBeInTheDocument();
+  });
+
+  it('decrements count by 1 when -1 button is clicked', () => {
+    render(<Counter />);
+    fireEvent.click(screen.getByRole('button', { name: /\+ 1/i }));
+    fireEvent.click(screen.getByRole('button', { name: /\- 1/i }));
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('resets count to 0 when Reset button is clicked', () => {
+    render(<Counter />);
+    fireEvent.click(screen.getByRole('button', { name: /\+ 1/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Reset/i }));
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('changes step to 5 and increments correctly', () => {
+    render(<Counter />);
+    fireEvent.click(screen.getByRole('button', { name: /Step: 5/i }));
+    fireEvent.click(screen.getByRole('button', { name: /\+ 5/i }));
+    expect(screen.getByText('5')).toBeInTheDocument();
+  });
+
+  it('changes step to 10 and decrements correctly', () => {
+    render(<Counter />);
+    fireEvent.click(screen.getByRole('button', { name: /Step: 10/i }));
+    fireEvent.click(screen.getByRole('button', { name: /\+ 10/i }));
+    fireEvent.click(screen.getByRole('button', { name: /\- 10/i }));
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+});
+```
+
+These tests demonstrate how to render a component, simulate user interactions using `fireEvent`, and assert on the expected outcomes using `screen` queries and `jest-dom` matchers. This approach ensures that the `Counter` component behaves as intended from a user's perspective.
+
+### **Running Tests**
+
+To run the tests, simply execute the following command in your terminal:
+
+```bash
+npm test
+```
+
+Vitest will run all test files (files ending with `.test.js`, `.test.jsx`, `.spec.js`, or `.spec.jsx`) and report the results.
+
+This integration of unit testing with Vitest and React Testing Library provides a solid foundation for building and maintaining high-quality React applications.
+
+

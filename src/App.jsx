@@ -1,4 +1,4 @@
-import { useState, useEffect, Component } from 'react'
+import { useState, useEffect, Component, lazy, Suspense } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
@@ -10,6 +10,7 @@ import ContextExamples from './components/ContextExamples';
 import ReducerExamples from './components/ReducerExamples';
 import RefExamples from './components/RefExamples';
 import PerformanceExamples from './components/PerformanceExamples';
+const LazyLoadedComponent = lazy(() => import("./components/LazyLoadedComponent.jsx"));
 import useApi from './hooks/useApi';
 import useLocalStorage from './hooks/useLocalStorage';
 import useToggle from './hooks/useToggle';
@@ -627,6 +628,7 @@ function App() {
               <TabsTrigger value="reducer">useReducer</TabsTrigger>
               <TabsTrigger value="ref">useRef</TabsTrigger>
               <TabsTrigger value="performance">Performance</TabsTrigger>
+              <TabsTrigger value="lazyloading">Lazy Loading</TabsTrigger>
               <TabsTrigger value="advanced">Advanced</TabsTrigger>
               <TabsTrigger value="twitter">Twitter</TabsTrigger>
             </TabsList>
@@ -822,6 +824,19 @@ return <p>Data: {data.title}</p>;`}
             
             <TabsContent value="performance" className="mt-6">
               <PerformanceExamples />
+            </TabsContent>
+            
+            <TabsContent value="lazyloading" className="mt-6">
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold">Lazy Loading with React.lazy & Suspense</h2>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <code>React.lazy</code> and <code>Suspense</code> allow you to code-split your application into smaller chunks,
+                  loading them only when they are needed. This can significantly improve initial load times.
+                </p>
+                <Suspense fallback={<div>Loading Lazy Component...</div>}>
+                  <LazyLoadedComponent />
+                </Suspense>
+              </div>
             </TabsContent>
             
             <TabsContent value="advanced" className="mt-6">

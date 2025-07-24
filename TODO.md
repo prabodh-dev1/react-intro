@@ -3,18 +3,18 @@
 ## 🎯 High Priority - Essential Modern React Concepts
 
 ### 1. Custom Hooks
-- [ ] Create `useApi` hook for data fetching
-- [ ] Create `useLocalStorage` hook for persistence
-- [ ] Create `useToggle` hook for boolean state
-- [ ] Add "Hooks" tab to demonstrate custom hooks
-- [ ] Show how to test custom hooks
+- [x] Create `useApi` hook for data fetching
+- [x] Create `useLocalStorage` hook for persistence
+- [x] Create `useToggle` hook for boolean state
+- [x] Add "Hooks" tab to demonstrate custom hooks
+- [x] Show how to test custom hooks
 
 ### 2. Context API & useContext
-- [ ] Implement ThemeContext for global theme management
-- [ ] Create UserContext for user preferences
-- [ ] Add Context Provider wrapper
-- [ ] Replace prop drilling with context in existing components
-- [ ] Add "Context" tab with examples
+- [x] Implement ThemeContext for global theme management
+- [x] Create UserContext for user preferences
+- [x] Add Context Provider wrapper
+- [x] Replace prop drilling with context in existing components
+- [x] Add "Context" tab with examples
 
 ### 3. useReducer Hook
 - [ ] Convert TodoList to use useReducer instead of useState

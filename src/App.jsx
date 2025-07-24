@@ -5,7 +5,13 @@ import { Badge } from '@/components/ui/badge.jsx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.jsx'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert.jsx'
 import { Heart, MessageCircle, Repeat2, Share, User, Calendar, AlertTriangle, RefreshCw } from 'lucide-react'
-import './App.css'
+import { ApiExample, LocalStorageExample, ToggleExample } from './components/HookExamples';
+import ContextExamples from './components/ContextExamples';
+import useApi from './hooks/useApi';
+import useLocalStorage from './hooks/useLocalStorage';
+import useToggle from './hooks/useToggle';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { UserProvider } from './context/UserContext';
 
 // Error Boundary Class Component
 class ErrorBoundary extends Component {
@@ -562,38 +568,38 @@ function TwitterFeed() {
 
 // Component 6: Theme Toggle with Context (simplified)
 function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false)
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
-  }, [isDark])
+  }, [theme]);
 
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Theme Toggle</CardTitle>
-        <CardDescription>Demonstrates useEffect for DOM manipulation</CardDescription>
+        <CardDescription>Demonstrates Context API for global state</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
           <span>Dark Mode</span>
           <Button 
-            onClick={() => setIsDark(!isDark)}
-            variant={isDark ? "default" : "outline"}
+            onClick={toggleTheme}
+            variant={theme === 'dark' ? "default" : "outline"}
           >
-            {isDark ? "🌙 Dark" : "☀️ Light"}
+            {theme === 'dark' ? "🌙 Dark" : "☀️ Light"}
           </Button>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Current theme: {isDark ? "Dark" : "Light"}
+          Current theme: {theme === 'dark' ? "Dark" : "Light"}
         </p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // Main App Component
@@ -601,16 +607,20 @@ function App() {
   const [activeTab, setActiveTab] = useState("basics")
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <ThemeProvider>
+      <UserProvider>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="container mx-auto px-4 py-8">
         <WelcomeMessage name="Developer" role="React Enthusiast" />
         
         <div className="mt-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="basics">Basics</TabsTrigger>
               <TabsTrigger value="state">State</TabsTrigger>
               <TabsTrigger value="effects">Effects</TabsTrigger>
+              <TabsTrigger value="hooks">Hooks</TabsTrigger>
+              <TabsTrigger value="context">Context</TabsTrigger>
               <TabsTrigger value="advanced">Advanced</TabsTrigger>
               <TabsTrigger value="twitter">Twitter</TabsTrigger>
             </TabsList>
@@ -716,6 +726,84 @@ const [step, setStep] = useState(1)`}
                 </div>
                 <TwitterFeed />
               </div>
+            </TabsContent>
+            
+            <TabsContent value="hooks" className="mt-6">
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold">Custom Hooks</h2>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Custom Hooks are reusable functions that encapsulate stateful logic and side effects.
+                  They allow you to reuse logic across different components without prop drilling or complex render props.
+                </p>
+                
+                <div className="grid gap-6 md:grid-cols-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>useApi Hook</CardTitle>
+                      <CardDescription>Fetches data from an API endpoint</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-700 dark:text-gray-300">
+                        This hook simplifies data fetching, providing loading, data, and error states.
+                      </p>
+                      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto">
+{`const { data, loading, error } = useApi(
+  'https://jsonplaceholder.typicode.com/todos/1'
+);
+
+if (loading) return <p>Loading data...</p>;
+if (error) return <p>Error: {error.message}</p>;
+return <p>Data: {data.title}</p>;`}
+                      </pre>
+                      <ApiExample />
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>useLocalStorage Hook</CardTitle>
+                      <CardDescription>Persists state in localStorage</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-700 dark:text-gray-300">
+                        This hook allows you to store and retrieve state from the browser's localStorage.
+                      </p>
+                      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto">
+{`const [name, setName] = useLocalStorage('username', 'Guest');
+
+<input 
+  value={name} 
+  onChange={(e) => setName(e.target.value)} 
+/>`}
+                      </pre>
+                      <LocalStorageExample />
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>useToggle Hook</CardTitle>
+                      <CardDescription>Manages boolean state</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-700 dark:text-gray-300">
+                        A simple hook to toggle boolean values, useful for modals, visibility, etc.
+                      </p>
+                      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-x-auto">
+{`const [isOn, toggle] = useToggle(false);
+
+<button onClick={toggle}>Toggle</button>
+{isOn && <p>It's ON!</p>}`}
+                      </pre>
+                      <ToggleExample />
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="context" className="mt-6">
+              <ContextExamples />
             </TabsContent>
             
             <TabsContent value="advanced" className="mt-6">
@@ -828,6 +916,8 @@ const [step, setStep] = useState(1)`}
         </footer>
       </div>
     </div>
+  </UserProvider>
+</ThemeProvider>
   )
 }
 

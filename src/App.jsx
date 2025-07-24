@@ -7,6 +7,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert.jsx'
 import { Heart, MessageCircle, Repeat2, Share, User, Calendar, AlertTriangle, RefreshCw } from 'lucide-react'
 import { ApiExample, LocalStorageExample, ToggleExample } from './components/HookExamples';
 import ContextExamples from './components/ContextExamples';
+import ReducerExamples from './components/ReducerExamples';
+import RefExamples from './components/RefExamples';
 import useApi from './hooks/useApi';
 import useLocalStorage from './hooks/useLocalStorage';
 import useToggle from './hooks/useToggle';
@@ -621,6 +623,8 @@ function App() {
               <TabsTrigger value="effects">Effects</TabsTrigger>
               <TabsTrigger value="hooks">Hooks</TabsTrigger>
               <TabsTrigger value="context">Context</TabsTrigger>
+              <TabsTrigger value="reducer">useReducer</TabsTrigger>
+              <TabsTrigger value="ref">useRef</TabsTrigger>
               <TabsTrigger value="advanced">Advanced</TabsTrigger>
               <TabsTrigger value="twitter">Twitter</TabsTrigger>
             </TabsList>
@@ -804,6 +808,14 @@ return <p>Data: {data.title}</p>;`}
             
             <TabsContent value="context" className="mt-6">
               <ContextExamples />
+            </TabsContent>
+            
+            <TabsContent value="reducer" className="mt-6">
+              <ReducerExamples />
+            </TabsContent>
+            
+            <TabsContent value="ref" className="mt-6">
+              <RefExamples />
             </TabsContent>
             
             <TabsContent value="advanced" className="mt-6">

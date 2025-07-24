@@ -17,16 +17,16 @@
 - [x] Add "Context" tab with examples
 
 ### 3. useReducer Hook
-- [ ] Convert TodoList to use useReducer instead of useState
-- [ ] Create shopping cart example with useReducer
-- [ ] Show comparison between useState vs useReducer
-- [ ] Add complex state management examples
+- [x] Convert TodoList to use useReducer instead of useState
+- [x] Create shopping cart example with useReducer
+- [x] Show comparison between useState vs useReducer
+- [x] Add complex state management examples
 
 ### 4. useRef Hook
-- [ ] Create focus management example
-- [ ] Add scroll-to-element functionality
-- [ ] Demonstrate DOM manipulation without breaking React patterns
-- [ ] Show previous value tracking example
+- [x] Create focus management example
+- [x] Add scroll-to-element functionality
+- [x] Demonstrate DOM manipulation without breaking React patterns
+- [x] Show previous value tracking example
 
 ### 5. Performance Hooks (useMemo & useCallback)
 - [ ] Add expensive calculation example with useMemo

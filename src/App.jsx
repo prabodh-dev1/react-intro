@@ -571,23 +571,27 @@ function App() {
         
         <div className="mt-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="basics">Basics</TabsTrigger>
-              <TabsTrigger value="state">State</TabsTrigger>
-              <TabsTrigger value="effects">Effects</TabsTrigger>
-              <TabsTrigger value="hooks">Hooks</TabsTrigger>
-              <TabsTrigger value="context">Context</TabsTrigger>
-              <TabsTrigger value="reducer">useReducer</TabsTrigger>
-              <TabsTrigger value="ref">useRef</TabsTrigger>
-              <TabsTrigger value="performance">Performance</TabsTrigger>
-              <TabsTrigger value="lazyloading">Lazy Loading</TabsTrigger>
-              <TabsTrigger value="compound">Compound Components</TabsTrigger>
-              <TabsTrigger value="renderprops">Render Props</TabsTrigger>
-              <TabsTrigger value="portals">Portals</TabsTrigger>
-              <TabsTrigger value="forwardrefs">Forward Refs</TabsTrigger>
-              <TabsTrigger value="advanced">Advanced</TabsTrigger>
-              <TabsTrigger value="twitter">Twitter</TabsTrigger>
-            </TabsList>
+            <div className="w-full">
+              <TabsList className="grid w-full grid-cols-8 h-auto gap-1 p-1 mb-2">
+                <TabsTrigger value="basics" className="text-xs px-2 py-1">Basics</TabsTrigger>
+                <TabsTrigger value="state" className="text-xs px-2 py-1">State</TabsTrigger>
+                <TabsTrigger value="effects" className="text-xs px-2 py-1">Effects</TabsTrigger>
+                <TabsTrigger value="hooks" className="text-xs px-2 py-1">Hooks</TabsTrigger>
+                <TabsTrigger value="context" className="text-xs px-2 py-1">Context</TabsTrigger>
+                <TabsTrigger value="reducer" className="text-xs px-2 py-1">useReducer</TabsTrigger>
+                <TabsTrigger value="ref" className="text-xs px-2 py-1">useRef</TabsTrigger>
+                <TabsTrigger value="performance" className="text-xs px-2 py-1">Performance</TabsTrigger>
+              </TabsList>
+              <TabsList className="grid w-full grid-cols-7 h-auto gap-1 p-1">
+                <TabsTrigger value="lazyloading" className="text-xs px-2 py-1">Lazy Loading</TabsTrigger>
+                <TabsTrigger value="compound" className="text-xs px-2 py-1">Compound Components</TabsTrigger>
+                <TabsTrigger value="renderprops" className="text-xs px-2 py-1">Render Props</TabsTrigger>
+                <TabsTrigger value="portals" className="text-xs px-2 py-1">Portals</TabsTrigger>
+                <TabsTrigger value="forwardrefs" className="text-xs px-2 py-1">Forward Refs</TabsTrigger>
+                <TabsTrigger value="advanced" className="text-xs px-2 py-1">Advanced</TabsTrigger>
+                <TabsTrigger value="twitter" className="text-xs px-2 py-1">Twitter</TabsTrigger>
+              </TabsList>
+            </div>
             
             <TabsContent value="basics" className="mt-6">
               <div className="grid gap-6 md:grid-cols-2">

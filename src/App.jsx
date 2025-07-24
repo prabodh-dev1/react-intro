@@ -10,6 +10,10 @@ import ContextExamples from './components/ContextExamples';
 import ReducerExamples from './components/ReducerExamples';
 import RefExamples from './components/RefExamples';
 import PerformanceExamples from './components/PerformanceExamples';
+import CompoundComponentsExamples from './components/CompoundComponentsExamples';
+import RenderPropsExamples from './components/RenderPropsExamples';
+import PortalsExamples from './components/PortalsExamples';
+import RefForwardingExamples from './components/RefForwardingExamples';
 const LazyLoadedComponent = lazy(() => import("./components/LazyLoadedComponent.jsx"));
 import useApi from './hooks/useApi';
 import useLocalStorage from './hooks/useLocalStorage';
@@ -629,6 +633,10 @@ function App() {
               <TabsTrigger value="ref">useRef</TabsTrigger>
               <TabsTrigger value="performance">Performance</TabsTrigger>
               <TabsTrigger value="lazyloading">Lazy Loading</TabsTrigger>
+              <TabsTrigger value="compound">Compound Components</TabsTrigger>
+              <TabsTrigger value="renderprops">Render Props</TabsTrigger>
+              <TabsTrigger value="portals">Portals</TabsTrigger>
+              <TabsTrigger value="forwardrefs">Forward Refs</TabsTrigger>
               <TabsTrigger value="advanced">Advanced</TabsTrigger>
               <TabsTrigger value="twitter">Twitter</TabsTrigger>
             </TabsList>
@@ -839,6 +847,22 @@ return <p>Data: {data.title}</p>;`}
               </div>
             </TabsContent>
             
+             <TabsContent value="compound" className="mt-6">
+              <CompoundComponentsExamples />
+            </TabsContent>
+            
+            <TabsContent value="renderprops" className="mt-6">
+              <RenderPropsExamples />
+            </TabsContent>
+            
+            <TabsContent value="portals" className="mt-6">
+              <PortalsExamples />
+            </TabsContent>
+            
+            <TabsContent value="forwardrefs" className="mt-6">
+              <RefForwardingExamples />
+            </TabsContent>
+            
             <TabsContent value="advanced" className="mt-6">
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold">Advanced Patterns</h2>
@@ -927,17 +951,6 @@ return <p>Data: {data.title}</p>;`}
                     />
                   </div>
                 </div>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="twitter" className="mt-6">
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold">Twitter Integration Example</h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  This section demonstrates how React components can be used to build social media interfaces like Twitter. 
-                  Each tweet is a component that manages its own state for interactions.
-                </p>
-                <TwitterFeed />
               </div>
             </TabsContent>
           </Tabs>

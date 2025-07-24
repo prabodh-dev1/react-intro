@@ -43,9 +43,9 @@
 - [ ] Show bundle size optimization
 
 ### 7. Compound Components Pattern
-- [ ] Create Accordion component using compound pattern
-- [ ] Build Modal component with compound pattern
-- [ ] Show flexible API design
+- [x] Create Accordion component using compound pattern
+- [x] Build Modal component with compound pattern
+- [x] Show flexible API design
 
 ### 8. Render Props Pattern
 - [ ] Create Mouse position tracker with render props
@@ -53,9 +53,9 @@
 - [ ] Compare with HOCs approach
 
 ### 9. Portal Usage
-- [ ] Modal component using createPortal
-- [ ] Tooltip component with portal
-- [ ] Toast notification system
+- [x] Modal component using createPortal
+- [x] Tooltip component with portal
+- [x] Toast notification system
 
 ### 10. Forward Refs
 - [ ] Create input component with forwardRef

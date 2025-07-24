@@ -29,10 +29,10 @@
 - [x] Show previous value tracking example
 
 ### 5. Performance Hooks (useMemo & useCallback)
-- [ ] Add expensive calculation example with useMemo
-- [ ] Show useCallback for preventing unnecessary re-renders
-- [ ] Create performance comparison demo
-- [ ] Add React.memo examples
+- [x] Add expensive calculation example with useMemo
+- [x] Show useCallback for preventing unnecessary re-renders
+- [x] Create performance comparison demo
+- [x] Add React.memo examples
 
 ## 🚀 Medium Priority - Advanced Patterns
 

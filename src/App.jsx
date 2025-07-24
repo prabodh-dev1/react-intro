@@ -9,6 +9,7 @@ import { ApiExample, LocalStorageExample, ToggleExample } from './components/Hoo
 import ContextExamples from './components/ContextExamples';
 import ReducerExamples from './components/ReducerExamples';
 import RefExamples from './components/RefExamples';
+import PerformanceExamples from './components/PerformanceExamples';
 import useApi from './hooks/useApi';
 import useLocalStorage from './hooks/useLocalStorage';
 import useToggle from './hooks/useToggle';
@@ -625,6 +626,7 @@ function App() {
               <TabsTrigger value="context">Context</TabsTrigger>
               <TabsTrigger value="reducer">useReducer</TabsTrigger>
               <TabsTrigger value="ref">useRef</TabsTrigger>
+              <TabsTrigger value="performance">Performance</TabsTrigger>
               <TabsTrigger value="advanced">Advanced</TabsTrigger>
               <TabsTrigger value="twitter">Twitter</TabsTrigger>
             </TabsList>
@@ -816,6 +818,10 @@ return <p>Data: {data.title}</p>;`}
             
             <TabsContent value="ref" className="mt-6">
               <RefExamples />
+            </TabsContent>
+            
+            <TabsContent value="performance" className="mt-6">
+              <PerformanceExamples />
             </TabsContent>
             
             <TabsContent value="advanced" className="mt-6">

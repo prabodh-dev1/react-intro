@@ -905,6 +905,17 @@ return <p>Data: {data.title}</p>;`}
                 </div>
               </div>
             </TabsContent>
+            
+            <TabsContent value="twitter" className="mt-6">
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold">Twitter Clone Example</h2>
+                <p className="text-gray-700 dark:text-gray-300">
+                  A complete Twitter-like component showcasing useEffect for data fetching, 
+                  state management for interactions, and component composition.
+                </p>
+                <TwitterFeed />
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
         
